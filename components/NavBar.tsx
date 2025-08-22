@@ -7,7 +7,7 @@ export default async function NavBar() {
 
   return (
     <header className='px-5 py-3 bg-white shadow-sm font-work-sans'>
-      <nav className='flex justify-between items-center'>
+      <nav className='flex-between'>
         <Link href='/'>
           <Image src='/logo.png' alt='logo' width={144} height={30} />
         </Link>
@@ -19,7 +19,6 @@ export default async function NavBar() {
                 <span>Create</span>
               </Link>
 
-              {/* Logout サーバーアクション */}
               <form
                 action={async () => {
                   'use server';
