@@ -11,7 +11,7 @@ export default function SearchFormReset() {
     const form = document.querySelector('.search-form') as HTMLFormElement;
     if (form) form.reset();
 
-    router.replace(pathname);
+    router.replace(pathname, { scroll: false });
   };
 
   return (
