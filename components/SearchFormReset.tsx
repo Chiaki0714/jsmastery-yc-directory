@@ -1,15 +1,17 @@
 'use client';
 
 import { X } from 'lucide-react';
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 
 export default function SearchFormReset() {
   const router = useRouter();
+  const pathname = usePathname();
+
   const reset = () => {
     const form = document.querySelector('.search-form') as HTMLFormElement;
     if (form) form.reset();
-    router.push('/');
+
+    router.replace(pathname);
   };
 
   return (

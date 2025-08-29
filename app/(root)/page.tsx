@@ -1,11 +1,17 @@
 import SearchForm from '@/components/SearchForm';
+import StartupCard, { StartupType } from '@/components/StartupCard';
+// import { client } from '@/sanity/lib/client';
+import { sanityFetch } from '@/sanity/lib/live';
+import { STARTUPS_QUERY } from '@/sanity/lib/queries';
 
 export default async function Home({
   searchParams,
 }: {
   searchParams: Promise<{ query: string }>;
 }) {
-  const query = (await searchParams).query;
+  const { query } = await searchParams;
+  // const posts = await client.fetch(STARTUPS_QUERY);
+  const { data: posts } = await sanityFetch({ query: STARTUPS_QUERY });
 
   return (
     <>
@@ -18,6 +24,22 @@ export default async function Home({
           Submit Ideas, Vote on Pitches, and Get Noticed in Virtual
         </p>
         <SearchForm query={query} />
+      </section>
+
+      <section className='section_container'>
+        <p className='text-30-semibold'>
+          {query ? `Search result for ${query}` : 'All Startups'}
+        </p>
+
+        <ul className='mt-7 card_grid'>
+          {posts?.length > 0 ? (
+            posts.map((post: StartupType) => (
+              <StartupCard key={post?._id} post={post} />
+            ))
+          ) : (
+            <p className='no-results'></p>
+          )}
+        </ul>
       </section>
     </>
   );

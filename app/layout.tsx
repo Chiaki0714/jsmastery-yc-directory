@@ -1,6 +1,9 @@
 import type { Metadata } from 'next';
 import { Work_Sans } from 'next/font/google';
 import './globals.css';
+import { SanityLive } from '@/sanity/lib/live';
+// studio/[[...tool]]/layout.tsxで読み込み
+// import 'easymde/dist/easymde.min.css';
 
 const workSans = Work_Sans({
   subsets: ['latin'],
@@ -23,6 +26,7 @@ export default function RootLayout({
     <html lang='en'>
       <body className={workSans.variable} suppressHydrationWarning>
         {children}
+        <SanityLive />
       </body>
     </html>
   );
