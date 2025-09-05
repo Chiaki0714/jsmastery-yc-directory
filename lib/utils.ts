@@ -12,3 +12,10 @@ export function formatDate(date: string) {
     year: 'numeric',
   });
 }
+
+export const getStartupUrl = (id: string) => `/startup/${id}`;
+export const getAuthorUrl = (authorId?: string) =>
+  authorId ? `/user/${authorId}` : '/user/unknown';
+
+export const getCategoryUrl = (category?: string) =>
+  category ? `/?query=${category.toLowerCase()}` : '/';

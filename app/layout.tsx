@@ -1,9 +1,8 @@
 import type { Metadata } from 'next';
 import { Work_Sans } from 'next/font/google';
-import './globals.css';
 import { SanityLive } from '@/sanity/lib/live';
-// studio/[[...tool]]/layout.tsxで読み込み
-// import 'easymde/dist/easymde.min.css';
+import './globals.css';
+import 'easymde/dist/easymde.min.css';
 
 const workSans = Work_Sans({
   subsets: ['latin'],

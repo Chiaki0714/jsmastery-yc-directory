@@ -1,4 +1,9 @@
-import { formatDate } from '@/lib/utils';
+import {
+  formatDate,
+  getStartupUrl,
+  getAuthorUrl,
+  getCategoryUrl,
+} from '@/lib/utils';
 import { EyeIcon } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -19,9 +24,9 @@ export default function StartupCard({ post }: { post: StartupType }) {
     description,
   } = post;
 
-  const startupUrl = `/startup/${_id}`;
-  const authorUrl = `/user/${author?._id}`;
-  const categoryUrl = `/?query=${category?.toLowerCase()}`;
+  const startupUrl = getStartupUrl(_id);
+  const authorUrl = getAuthorUrl(author?._id);
+  const categoryUrl = getCategoryUrl(category);
 
   return (
     <li className='startup-card group'>
@@ -45,7 +50,7 @@ export default function StartupCard({ post }: { post: StartupType }) {
         <Link href={authorUrl}>
           <Image
             src={author?.image || 'https://avatar.iran.liara.run/public'}
-            alt={author?.name ?? 'Unknown User'}
+            alt='avatar'
             width={48}
             height={48}
             className='rounded-full'
