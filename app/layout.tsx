@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import { Work_Sans } from 'next/font/google';
-import { SanityLive } from '@/sanity/lib/live';
 import './globals.css';
 import 'easymde/dist/easymde.min.css';
 
@@ -25,7 +24,6 @@ export default function RootLayout({
     <html lang='en'>
       <body className={workSans.variable} suppressHydrationWarning>
         {children}
-        <SanityLive />
       </body>
     </html>
   );

@@ -1,7 +1,6 @@
 import SearchForm from '@/components/SearchForm';
 import StartupCard, { StartupType } from '@/components/StartupCard';
-// import { client } from '@/sanity/lib/client';
-import { sanityFetch } from '@/sanity/lib/live';
+import { sanityFetch, SanityLive } from '@/sanity/lib/live';
 import { STARTUPS_QUERY } from '@/sanity/lib/queries';
 
 export default async function Home({
@@ -17,6 +16,7 @@ export default async function Home({
 
   return (
     <>
+      <SanityLive />
       <section className='pink_container'>
         <p className='tag'>Pitch, Vote, And Grow</p>
         <h1 className='app-heading'>

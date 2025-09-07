@@ -27,6 +27,7 @@ export default function StartupCard({ post }: { post: StartupType }) {
   const startupUrl = getStartupUrl(_id);
   const authorUrl = getAuthorUrl(author?._id);
   const categoryUrl = getCategoryUrl(category);
+  const displayViews = views && views > 0 ? views - 1 : 0;
 
   return (
     <li className='startup-card group'>
@@ -34,7 +35,7 @@ export default function StartupCard({ post }: { post: StartupType }) {
         <p className='startup_card_date'>{formatDate(_createdAt)}</p>
         <div className='flex gap-1.5'>
           <EyeIcon className='size-6 text-primary' />
-          <span className='text-16-medium'>{views}</span>
+          <span className='text-16-medium'>{displayViews}</span>
         </div>
       </div>
 

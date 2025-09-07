@@ -12,6 +12,8 @@ import { Skeleton } from '@/components/ui/skeleton';
 import View from '@/components/View';
 
 export const experimental_ppr = true;
+export const revalidate = 60;
+
 const md = markdownit();
 const window = new JSDOM('').window;
 const purify = DOMPurify(window);
@@ -28,10 +30,10 @@ export default async function Page({
   if (!post) return notFound();
   const {
     title,
-    slug,
+    // slug,
     _createdAt,
     author,
-    views,
+    // views,
     description,
     category,
     image,

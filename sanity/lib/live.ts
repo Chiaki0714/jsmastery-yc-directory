@@ -4,9 +4,7 @@
 import 'server-only';
 import { defineLive } from 'next-sanity';
 import { client } from './client';
-
-const serverToken = process.env.SANITY_SERVER_TOKEN ?? undefined;
-const browserToken = process.env.SANITY_BROWSER_TOKEN ?? undefined;
+import { serverToken, browserToken } from '../env';
 
 export const { sanityFetch, SanityLive } = defineLive({
   client,
