@@ -2,6 +2,7 @@ import SearchForm from '@/components/SearchForm';
 import StartupCard, { StartupType } from '@/components/StartupCard';
 import { sanityFetch, SanityLive } from '@/sanity/lib/live';
 import { STARTUPS_QUERY } from '@/sanity/lib/queries';
+import { auth } from '@/auth';
 
 export default async function Home({
   searchParams,
@@ -10,9 +11,12 @@ export default async function Home({
 }) {
   const { query } = await searchParams;
   const params = { search: query || null };
-
   // const posts = await client.fetch(STARTUPS_QUERY);
   const { data: posts } = await sanityFetch({ query: STARTUPS_QUERY, params });
+
+  // auth():https://authjs.dev/getting-started/migrating-to-v5
+  const session = await auth();
+  console.log(session?.id);
 
   return (
     <>
