@@ -16,7 +16,7 @@ export default async function Home({
 
   // auth():https://authjs.dev/getting-started/migrating-to-v5
   const session = await auth();
-  console.log(session?.id);
+  console.log(session?.user.id);
 
   return (
     <>

@@ -1,3 +1,4 @@
+import { Toaster } from '@/components/ui/sonner';
 import NavBar from '../../components/NavBar';
 
 export default function Layout({
@@ -7,6 +8,7 @@ export default function Layout({
     <main className='fonr-work-sans'>
       <NavBar />
       {children}
+      <Toaster richColors position='top-right' />
     </main>
   );
 }
