@@ -19,13 +19,13 @@ export default function StartupCard({ post }: { post: StartupType }) {
     author,
     title,
     category,
-    _id,
+    slug,
     image,
     description,
   } = post;
 
-  const startupUrl = getStartupUrl(_id);
-  const authorUrl = getAuthorUrl(author?._id);
+  const startupUrl = getStartupUrl(slug?.current ?? '');
+  const authorUrl = getAuthorUrl(author?.slug?.current);
   const categoryUrl = getCategoryUrl(category);
   const displayViews = views && views > 0 ? views - 1 : 0;
 

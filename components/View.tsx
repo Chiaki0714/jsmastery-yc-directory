@@ -4,15 +4,15 @@ import { client } from '@/sanity/lib/client';
 import { after } from 'next/server';
 import { writeClient } from '@/sanity/lib/write-client';
 
-export default async function View({ id }: { id: string }) {
-  const { views: totalViews } = await client
+export default async function View({ slug }: { slug: string }) {
+  const { _id, views: totalViews } = await client
     .withConfig({ useCdn: false })
-    .fetch(STARTUP_VIEWS_QUERY, { id });
+    .fetch(STARTUP_VIEWS_QUERY, { slug });
 
   after(
     async () =>
       await writeClient
-        .patch(id)
+        .patch(_id)
         .set({ views: totalViews + 1 })
         .commit()
   );

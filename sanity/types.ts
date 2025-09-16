@@ -40,9 +40,10 @@ export type Author = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  id?: number;
+  githubId?: number;
   name?: string;
   username?: string;
+  slug?: Slug;
   email?: string;
   image?: string;
   bio?: string;

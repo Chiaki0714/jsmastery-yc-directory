@@ -32,14 +32,14 @@ export default function StartupForm() {
 
   // success toast and redirect
   useEffect(() => {
-    if (state.status === 'SUCCESS') {
+    if (state.status === 'SUCCESS' && state.slug) {
       toast.success('Your startup pitch has been created successfully');
-      router.push(`/startup/${state._id}`);
+      router.push(`/startup/${state.slug}`);
     }
-  }, [state.status, state._id, router]);
+  }, [state.status, state.slug, router]);
 
   return (
-    <form method='POST' action={formAction} className='startup-form'>
+    <form action={formAction} className='startup-form'>
       <StartupFormField id='title' label='Title' error={state.errors?.title}>
         <Input
           id='title'

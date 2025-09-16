@@ -1,9 +1,11 @@
 'use server';
 
 import { auth } from '@/auth';
+
 import { formSchema } from '@/lib/validation';
 import { writeClient } from '@/sanity/lib/write-client';
 import type { StartupFormState } from './types';
+import { generateUniqueSlug } from '@/lib/utils';
 
 export async function createStartup(
   prevState: StartupFormState,
@@ -45,53 +47,45 @@ export async function createStartup(
     };
   }
 
-  const validData = result.data;
-  console.log(validData);
-
   // 成功時
-  return {
-    ...prevState,
-    errors: {},
-    globalError: '',
-    status: 'SUCCESS',
+  const validData = result.data;
+
+  // Slug 生成
+  const slug = generateUniqueSlug(validData.title);
+
+  // 保存するドキュメントを組み立て
+  const startup = {
+    _type: 'startup',
+    title: validData.title,
+    description: validData.description,
+    category: validData.category,
+    image: validData.link,
+    slug: {
+      _type: 'slug',
+      current: slug,
+    },
+    author: {
+      _type: 'reference',
+      _ref: session.user.id, // ← 認証情報からユーザーIDを参照
+    },
+    pitch: validData.pitch,
   };
 
-  //   // Slug 生成
-  //   const slug = slugify(validData.title, { lower: true, strict: true });
+  try {
+    // Sanity に保存
+    await writeClient.create(startup);
 
-  //   // 保存するドキュメントを組み立て
-  //   const startup = {
-  //     _type: 'startup',
-  //     title: validData.title,
-  //     description: validData.description,
-  //     category: validData.category,
-  //     image: validData.link,
-  //     pitch: validData.pitch,
-  //     slug: {
-  //       _type: 'slug',
-  //       current: slug,
-  //     },
-  //     author: {
-  //       _type: 'reference',
-  //       _ref: session.user.id, // ← 認証情報からユーザーIDを参照
-  //     },
-  //   };
-
-  //   try {
-  //     // Sanity に保存
-  //     const result = await writeClient.create(startup);
-
-  //     return {
-  //       ...prevState,
-  //       status: 'SUCCESS',
-  //       _id: result._id,
-  //     };
-  //   } catch (error) {
-  //     console.error(error);
-  //     return {
-  //       ...prevState,
-  //       errors: { form: ['An unexpected error occurred'] },
-  //       status: 'ERROR',
-  //     };
-  //   }
+    return {
+      ...prevState,
+      status: 'SUCCESS',
+      slug,
+    };
+  } catch (error) {
+    console.error(error);
+    return {
+      ...prevState,
+      errors: { form: ['An unexpected error occurred'] },
+      status: 'ERROR',
+    };
+  }
 }

@@ -2,7 +2,7 @@ export type StartupFormState = {
   errors: Record<string, string[]>; // フィールドごとのエラー
   globalError: string; // 全体エラー (toast 用)
   status: 'INITIAL' | 'ERROR' | 'SUCCESS';
-  _id?: string;
+  slug?: string; // リダイレクト用の slug を追加
 };
 
 export type StartupFormFieldProps = {

@@ -15,8 +15,8 @@ export default async function Home({
   const { data: posts } = await sanityFetch({ query: STARTUPS_QUERY, params });
 
   // auth():https://authjs.dev/getting-started/migrating-to-v5
-  const session = await auth();
-  console.log(session?.user.id);
+  // const session = await auth();
+  // console.log(session?.user.id);
 
   return (
     <>

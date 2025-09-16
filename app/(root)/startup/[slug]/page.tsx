@@ -2,7 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { client } from '@/sanity/lib/client';
-import { STARTUP_BY_ID_QUERY } from '@/sanity/lib/queries';
+import { STARTUP_BY_SLUG_QUERY } from '@/sanity/lib/queries';
 import markdownit from 'markdown-it';
 import { formatDate, getAuthorUrl } from '@/lib/utils';
 import { JSDOM } from 'jsdom';
@@ -22,23 +22,14 @@ export default async function Page({
   params,
 }: {
   params: Promise<{
-    id: string;
+    slug: string;
   }>;
 }) {
-  const { id } = await params;
-  const post = await client.fetch(STARTUP_BY_ID_QUERY, { id });
+  const { slug } = await params;
+  const post = await client.fetch(STARTUP_BY_SLUG_QUERY, { slug });
   if (!post) return notFound();
-  const {
-    title,
-    // slug,
-    _createdAt,
-    author,
-    // views,
-    description,
-    category,
-    image,
-    pitch,
-  } = post;
+  const { title, _createdAt, author, description, category, image, pitch } =
+    post;
 
   const html = md.render(pitch || '');
   const parsedContent = purify.sanitize(html);
@@ -66,7 +57,7 @@ export default async function Page({
         <div className='mt-10 max-w-4xl mx-auto grid gap-5'>
           <div className='flex-between gap-5'>
             <Link
-              href={getAuthorUrl(author?._id)}
+              href={getAuthorUrl(author?.slug.current)}
               className='flex gap-2 items-center'
             >
               <Image
@@ -104,7 +95,7 @@ export default async function Page({
         {/* TODO: EDITOR SELECTED STARTUPS */}
 
         <Suspense fallback={<Skeleton className='view_skeleton' />}>
-          <View id={id} />
+          <View slug={slug} />
         </Suspense>
       </section>
     </>

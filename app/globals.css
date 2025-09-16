@@ -159,6 +159,10 @@
     @apply flex-1 font-bold placeholder:font-semibold placeholder:text-black-100 w-full h-auto outline-none autofill:bg-white;
   }
 
+  .startup-form_input {
+    @apply border-[3px] border-black px-5 py-7 text-[18px] text-black font-semibold rounded-full mt-3 placeholder:text-black-300;
+  }
+
   .search-btn {
     @apply size-[50px] rounded-full bg-black flex justify-center items-center;
   }
@@ -255,9 +259,9 @@
   padding: 10px !important;
 }
 
-input:-webkit-autofill {
+/* input:-webkit-autofill {
   appearance: none !important;
   background-color: white !important;
   box-shadow: 0 0 0px 1000px white inset !important;
   -webkit-text-fill-color: black !important;
-}
+} */

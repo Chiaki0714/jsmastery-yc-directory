@@ -151,7 +151,7 @@
           "type": "string"
         }
       },
-      "id": {
+      "githubId": {
         "type": "objectAttribute",
         "value": {
           "type": "number"
@@ -169,6 +169,14 @@
         "type": "objectAttribute",
         "value": {
           "type": "string"
+        },
+        "optional": true
+      },
+      "slug": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "inline",
+          "name": "slug"
         },
         "optional": true
       },
