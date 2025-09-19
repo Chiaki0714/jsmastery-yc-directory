@@ -32,6 +32,23 @@ export const STARTUP_BY_SLUG_QUERY =
   pitch,
   }`);
 
+export const STARTUP_BY_AUTHOR_ID_QUERY = defineQuery(
+  `*[_type == "startup" && author._ref == $authorId]{
+   _id, 
+  title, 
+  slug,
+  _createdAt,
+  author -> {
+    _id, name, username, image, bio, slug
+  }, 
+  views,
+  description,
+  category,
+  image,
+  pitch,
+  }`
+);
+
 export const STARTUP_VIEWS_QUERY = defineQuery(`
   *[_type == "startup" && slug.current == $slug][0]{
     _id, slug, views
@@ -52,8 +69,8 @@ export const AUTHOR_BY_GITHUB_ID_QUERY = defineQuery(`
 `);
 
 // ページ表示用
-export const AUTHOR_BY_USERNAME_QUERY = defineQuery(`
-  *[_type == "author" && username == $username][0]{
+export const AUTHOR_BY_SLUG_QUERY = defineQuery(`
+  *[_type == "author" && slug.current == $slug][0]{
     _id,
     githubId,
     name,

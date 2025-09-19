@@ -1,3 +1,5 @@
+import { Author, Startup } from '@/sanity/types';
+
 export type StartupFormState = {
   errors: Record<string, string[]>; // フィールドごとのエラー
   globalError: string; // 全体エラー (toast 用)
@@ -14,3 +16,5 @@ export type StartupFormFieldProps = {
     [key: string]: unknown;
   }; // 公式の属性 + カスタム属性のみ通す
 };
+
+export type StartupCardType = Omit<Startup, 'author'> & { author?: Author };

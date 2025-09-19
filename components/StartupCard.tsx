@@ -8,11 +8,9 @@ import { EyeIcon } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from './ui/button';
-import { Author, Startup } from '@/sanity/types';
+import { StartupCardType } from '@/app/(root)/types';
 
-export type StartupType = Omit<Startup, 'author'> & { author?: Author };
-
-export default function StartupCard({ post }: { post: StartupType }) {
+export default function StartupCard({ post }: { post: StartupCardType }) {
   const {
     _createdAt,
     views,
@@ -66,6 +64,7 @@ export default function StartupCard({ post }: { post: StartupType }) {
             src={image || 'https://placehold.jp/400x250.png'}
             alt={title || 'Startup Project'}
             fill
+            sizes='(max-width: 1232px) 80vw, 1232px'
           />
         </div>
       </Link>

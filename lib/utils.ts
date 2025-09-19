@@ -5,6 +5,8 @@ import slugify from 'slugify';
 import { nanoid } from 'nanoid';
 
 export function cn(...inputs: ClassValue[]) {
+  // 競合するクラスを自動マージ https://www.npmjs.com/package/tailwind-merge
+  // クラス出す分け https://www.npmjs.com/package/clsx
   return twMerge(clsx(inputs));
 }
 

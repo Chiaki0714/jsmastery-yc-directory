@@ -4,8 +4,8 @@ import { auth } from '@/auth';
 
 import { formSchema } from '@/lib/validation';
 import { writeClient } from '@/sanity/lib/write-client';
-import type { StartupFormState } from './types';
 import { generateUniqueSlug } from '@/lib/utils';
+import { StartupFormState } from '../types';
 
 export async function createStartup(
   prevState: StartupFormState,

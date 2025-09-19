@@ -18,6 +18,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
           githubId: id,
         });
 
+      // ログイン時新規であればauthorデータ作成
       if (!user) {
         await writeClient.create({
           _type: 'author',
